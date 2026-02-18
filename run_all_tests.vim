@@ -24,19 +24,19 @@ def RunPatternTest(pattern_name: string, pattern_path: string, demo_function: st
   var test_name = $"{pattern_name}"
   var success = true
   var error_msg = ""
-  
+
   try
     # Source the pattern file
     execute $'source {pattern_path}'
-    
+
     # Run the demo function
     execute $'call {demo_function}()'
-    
+
   catch
     success = false
     error_msg = v:exception
   endtry
-  
+
   # Record result
   test_results->add({
     'name': test_name,
@@ -44,7 +44,7 @@ def RunPatternTest(pattern_name: string, pattern_path: string, demo_function: st
     'success': success,
     'error': error_msg
   })
-  
+
   if success
     echohl None
     echo $'✓ {test_name}'
@@ -54,7 +54,7 @@ def RunPatternTest(pattern_name: string, pattern_path: string, demo_function: st
     echo $'✗ {test_name}: {error_msg}'
     echohl None
   endif
-  
+
   total_tests += 1
   return success
 enddef
@@ -65,7 +65,7 @@ def PrintSummary()
   echo repeat("=", 80)
   echo "TEST SUMMARY"
   echo repeat("=", 80)
-  
+
   if failed_tests == 0
     echohl MoreMsg
     echo $"✓ All {passed_tests} tests passed!"
@@ -83,7 +83,7 @@ def PrintSummary()
       endif
     endfor
   endif
-  
+
   echo ""
   echo repeat("=", 80)
   echo $"Total Tests: {total_tests} | Passed: {passed_tests} | Failed: {failed_tests}"
@@ -94,94 +94,94 @@ enddef
 # Main test execution
 def RunAllTests()
   PrintHeader()
-  
+
   # Behavioral Patterns
   echo "BEHAVIORAL PATTERNS"
   echo repeat("-", 80)
-  RunPatternTest("Chain of Responsibility", 
+  RunPatternTest("Chain of Responsibility",
     'behavioral-patterns/chain-of-responsibility/chain_of_responsibility.vim',
     'g:RunChainOfResponsibilityDemo')
-  RunPatternTest("Command", 
+  RunPatternTest("Command",
     'behavioral-patterns/command/command_pattern.vim',
     'g:RunCommandPatternDemo')
-  RunPatternTest("Iterator", 
+  RunPatternTest("Iterator",
     'behavioral-patterns/iterator/iterator_pattern.vim',
     'g:RunIteratorPatternDemo')
-  RunPatternTest("Mediator", 
+  RunPatternTest("Mediator",
     'behavioral-patterns/mediator/mediator_pattern.vim',
     'g:RunMediatorPatternDemo')
-  RunPatternTest("Memento", 
+  RunPatternTest("Memento",
     'behavioral-patterns/memento/memento_pattern.vim',
     'g:RunMementoPatternDemo')
-  RunPatternTest("Observer", 
+  RunPatternTest("Observer",
     'behavioral-patterns/observer/observer_pattern.vim',
     'g:RunObserverPatternDemo')
-  RunPatternTest("State", 
+  RunPatternTest("State",
     'behavioral-patterns/state/state_pattern.vim',
     'g:RunStatePatternDemo')
-  RunPatternTest("Strategy", 
+  RunPatternTest("Strategy",
     'behavioral-patterns/strategy/strategy_pattern.vim',
     'g:RunStrategyPatternDemo')
-  RunPatternTest("Template Method", 
+  RunPatternTest("Template Method",
     'behavioral-patterns/template-method/template_method_pattern.vim',
     'g:RunTemplateMethodDemo')
-  RunPatternTest("Visitor", 
+  RunPatternTest("Visitor",
     'behavioral-patterns/visitor/visitor_pattern.vim',
     'g:RunVisitorPatternDemo')
-  
+
   echo ""
   echo "CREATIONAL PATTERNS"
   echo repeat("-", 80)
-  RunPatternTest("Abstract Factory", 
+  RunPatternTest("Abstract Factory",
     'creational-patterns/abstract-factory/abstract_factory.vim',
     'g:RunAbstractFactoryDemo')
-  RunPatternTest("Builder", 
+  RunPatternTest("Builder",
     'creational-patterns/builder/builder_pattern.vim',
     'g:RunBuilderPatternDemo')
-  RunPatternTest("Builder - Fluent", 
+  RunPatternTest("Builder - Fluent",
     'creational-patterns/builder/builder_pattern.vim',
     'g:RunFluentBuilderDemo')
-  RunPatternTest("Factory Method - Dialog", 
+  RunPatternTest("Factory Method - Dialog",
     'creational-patterns/factory-method/dialog_factory.vim',
     'g:RunDialogFactoryDemo')
-  RunPatternTest("Factory Method - Document", 
+  RunPatternTest("Factory Method - Document",
     'creational-patterns/factory-method/document_factory.vim',
     'g:RunDocumentFactoryDemo')
-  RunPatternTest("Prototype", 
+  RunPatternTest("Prototype",
     'creational-patterns/prototype/prototype_pattern.vim',
     'g:RunPrototypePatternDemo')
-  RunPatternTest("Prototype - Deep Copy", 
+  RunPatternTest("Prototype - Deep Copy",
     'creational-patterns/prototype/prototype_pattern.vim',
     'g:RunDeepCopyDemo')
-  RunPatternTest("Singleton", 
+  RunPatternTest("Singleton",
     'creational-patterns/singleton/singleton_pattern.vim',
     'g:RunSingletonPatternDemo')
-  
+
   echo ""
   echo "STRUCTURAL PATTERNS"
   echo repeat("-", 80)
-  RunPatternTest("Adapter", 
+  RunPatternTest("Adapter",
     'structural-patterns/adapter/adapter_pattern.vim',
     'g:RunAdapterPatternDemo')
-  RunPatternTest("Bridge", 
+  RunPatternTest("Bridge",
     'structural-patterns/bridge/bridge_pattern.vim',
     'g:RunBridgePatternDemo')
-  RunPatternTest("Composite", 
+  RunPatternTest("Composite",
     'structural-patterns/composite/composite_pattern.vim',
     'g:RunCompositePatternDemo')
-  RunPatternTest("Decorator", 
+  RunPatternTest("Decorator",
     'structural-patterns/decorator/decorator_pattern.vim',
     'g:RunDecoratorPatternDemo')
-  RunPatternTest("Facade", 
+  RunPatternTest("Facade",
     'structural-patterns/facade/facade_pattern.vim',
     'g:RunFacadePatternDemo')
-  RunPatternTest("Flyweight", 
+  RunPatternTest("Flyweight",
     'structural-patterns/flyweight/flyweight_pattern.vim',
     'g:RunFlyweightPatternDemo')
-  RunPatternTest("Proxy", 
+  RunPatternTest("Proxy",
     'structural-patterns/proxy/proxy_pattern.vim',
     'g:RunProxyPatternDemo')
-  
+
   PrintSummary()
 enddef
 
